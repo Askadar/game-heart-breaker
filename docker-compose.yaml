@@ -1,0 +1,18 @@
+version: '3.7'
+
+services:
+  game:
+    container_name: heart-breaker-game
+    build:
+      dockerfile: './Dockerfile'
+      context: ./
+    ports:
+      - 3000:3000
+    labels:
+      caddy: heart-breaker.zarahia.com
+      caddy.reverse_proxy: http://game:3000
+    restart: unless-stopped
+
+networks:
+  default:
+    name: public
